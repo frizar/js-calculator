@@ -100,7 +100,7 @@ export default class Calculator {
             // 1--1 == ['1','','1']
             // numbers.length === 4, two numbers is negative -1--1
             // -1--1 == ['', '1', '', '1']
-            if (numbers.length === 3/* && operator === '-' not necessary*/) {
+            if (numbers.length === 3) {
                 if (numbers[0] === '') { // can be 0
                     numbers = [-numbers[1], +numbers[2]];
                 } else if (numbers[1] === '') { // can be 0
