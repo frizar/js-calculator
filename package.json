@@ -1,0 +1,31 @@
+{
+  "name": "js-calculator",
+  "version": "1.0.0",
+  "description": "test task",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frizar/js-calculator.git"
+  },
+  "author": "vkfrizar@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frizar/js-calculator/issues"
+  },
+  "homepage": "https://github.com/frizar/js-calculator#readme",
+  "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "uglify-js": "^2.8.29",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "node-static": "^0.7.9"
+  }
+}
