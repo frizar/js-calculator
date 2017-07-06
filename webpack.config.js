@@ -4,7 +4,7 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    watch: true,
+    watch: false,
     entry: './src/app.js',
     output: {
         filename: 'bundle.js',
@@ -17,6 +17,13 @@ module.exports = {
             loader: 'babel-loader',
             options: {
                 presets: ['env']
+            }
+        }, {
+            test: /\.html$/,
+            exclude: /node_modules/,
+            loader: 'html-loader',
+            options: {
+                minimize: true
             }
         }]
     },

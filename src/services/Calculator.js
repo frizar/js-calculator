@@ -1,6 +1,6 @@
 'use strict';
 
-export default class JSCalculator {
+export default class Calculator {
     constructor() {
         /**
          * Math operators ordered by priority [/ * - +]
@@ -42,7 +42,7 @@ export default class JSCalculator {
      */
     _evalExpression(expression) {
         // looking for expressions in brackets like (2.5+2*2)
-        const bracketExpressions = JSCalculator.getBracketExpressions(expression);
+        const bracketExpressions = Calculator.getBracketExpressions(expression);
 
         if (bracketExpressions.length) {
             bracketExpressions.forEach((bracketExpression) => {
@@ -68,14 +68,14 @@ export default class JSCalculator {
         const operators = this._operators;
 
         operators.forEach((operator) => {
-            let nextMathExpression = JSCalculator.getSimpleMathExpressions(operator, expression);
+            let nextMathExpression = Calculator.getSimpleMathExpressions(operator, expression);
             // while exist math operators
             while (nextMathExpression !== null) {
                 const mathExpression = nextMathExpression[0];
                 const result = this._calcMathOperation(operator, mathExpression);
                 expression = expression.replace(mathExpression, result);
                 // search next math expression
-                nextMathExpression = JSCalculator.getSimpleMathExpressions(operator, expression);
+                nextMathExpression = Calculator.getSimpleMathExpressions(operator, expression);
             }
         });
 
@@ -92,8 +92,6 @@ export default class JSCalculator {
     _calcMathOperation(operator, mathExpression) {
         let numbers = mathExpression.split(operator);
         // convert to numbers
-        numbers[0] = +numbers[0];
-        numbers[1] = +numbers[1];
         if (operator === '-' && numbers.length > 2) {
             // operator -
             // numbers.length === 2, OK, two numbers is positive 1-1
@@ -103,10 +101,10 @@ export default class JSCalculator {
             // numbers.length === 4, two numbers is negative -1--1
             // -1--1 == ['', '1', '', '1']
             if (numbers.length === 3/* && operator === '-' not necessary*/) {
-                if (!numbers[0]) {
-                    numbers = [-numbers[1], numbers[2]];
-                } else if (!numbers[1]) {
-                    numbers = [numbers[0], -numbers[2]];
+                if (numbers[0] === '') { // can be 0
+                    numbers = [-numbers[1], +numbers[2]];
+                } else if (numbers[1] === '') { // can be 0
+                    numbers = [+numbers[0], -numbers[2]];
                 }
             } else if (numbers.length === 4) {
                 numbers = [-numbers[1], -numbers[3]];
@@ -114,7 +112,7 @@ export default class JSCalculator {
         }
 
         // convert strings to numbers and calculate
-        return this._getOperation(operator)(numbers[0], numbers[1]);
+        return this._getOperation(operator)(+numbers[0], +numbers[1]);
     }
 
     /**

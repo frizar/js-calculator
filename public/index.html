@@ -1,11 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="calculatorApp">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title>js-calculator</title>
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
 
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+            <calculator></calculator>
+        </div>
+    </div>
+</div>
+
+<script src="/angular/angular.min.js"></script>
 <script src="/build/js/bundle.js"></script>
 
 </body>

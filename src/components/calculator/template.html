@@ -1,0 +1,37 @@
+<fieldset>
+    <legend>Calculator</legend>
+    <form ng-submit="$ctrl.calculate()">
+        <div class="form-group">
+            <label for="expression">Math Expression</label>
+            <div class="row">
+                <div class="col-8 col-lg-9">
+                    <input type="text" class="form-control" id="expression"
+                           aria-describedby="expressionHelp" autocomplete="off"
+                           placeholder="Enter math expression" ng-model="$ctrl.data.expression">
+                </div>
+                <div class="col-4 col-lg-3 text-center">
+                    <button type="submit" class="btn btn-primary">=</button>
+                    <button type="button" ng-click="$ctrl.cleanCalculator()" class="btn btn-secondary">C</button>
+                </div>
+            </div>
+            <small id="expressionHelp" class="form-text text-muted">
+                Example: 3 - -2 * (5 + 5 / -2.5 / 2 - 2 * 3) + (10 * 3 + (6 - 3)) / 3
+            </small>
+            <div class="alert alert-info" role="alert">
+                <strong>Result:</strong> <span ng-bind="$ctrl.data.result"></span>
+            </div>
+        </div>
+        <div class="form-group" ng-if="$ctrl.data.history.length">
+            <label>History</label>
+            <ul>
+                <li ng-repeat="history in $ctrl.data.history | orderBy:'-'">
+                    <a ng-href="#loadExpression" ng-click="$ctrl.loadExpression($event, history)">
+                        <small ng-bind="history.expression"></small>
+                    </a>
+                    <small> = </small>
+                    <span class="badge badge-default badge-pill" ng-bind="history.result"></span>
+                </li>
+            </ul>
+        </div>
+    </form>
+</fieldset>

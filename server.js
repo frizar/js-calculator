@@ -1,17 +1,15 @@
 'use strict';
 
 const http = require('http');
-const nodeStatic = require('node-static');
+const Koa = require('koa');
+const serve = require('koa-static');
 
-const fileServer = new nodeStatic.Server('./public');
+const app = new Koa();
 
-const server = http.createServer((req, res) => {
-    req.addListener('end', () => {
-        fileServer.serve(req, res);
-    }).resume();
-});
+app.use(serve('./public'));
+app.use(serve('./node_modules'));
 
 const PORT = 3000;
-server.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server listening port ${PORT}`);
 });
